@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Андрей Быченков — Python Backend-разработчик</title>
+    <meta name="description" content="Андрей Быченков — Python backend-разработчик. Django, FastAPI, SQLAlchemy, PostgreSQL, Celery, Redis, RabbitMQ, Docker, Kubernetes. Открыт к предложениям.">
+
+    <!-- Превью ссылки в Telegram / VK / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Андрей Быченков — Python Backend-разработчик">
+    <meta property="og:description" content="Django, FastAPI, PostgreSQL, Celery, Redis, RabbitMQ, Docker, AI Agents. Открыт к предложениям.">
+    <meta property="og:image" content="https://andreybychenkow.github.io/static/pro.png">
+    <meta property="og:url" content="https://andreybychenkow.github.io/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #13171b;
+            --card: rgba(31, 36, 42, 0.9);
+            --accent: #00ffe7;
+            --accent-soft: #00ffe780;
+            --text: #e6edf3;
+            --muted: #a8b2bc;
+            --yellow: #ffd600;
+            --green: #a4e964;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Сбалансированный анимированный фон: созвездия + код в приглушённых тонах */
+        #python-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            display: block !important;
+        }
+        h1, h2, h3, .mono { font-family: 'Fira Mono', monospace; }
+        a { color: var(--accent); }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 28px 3vw 44px;
+        }
+
+        /* ---------- Шапка ---------- */
+        .header { text-align: center; margin-bottom: 32px; }
+        .profile-photo {
+            width: 134px; height: 134px; border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 18px var(--accent-soft);
+            margin-bottom: 14px;
+            background: #1e242a;
+        }
+        .neon {
+            color: var(--accent);
+            text-shadow: 0 0 8px var(--accent), 0 0 24px var(--accent-soft);
+            font-size: 2.2rem; letter-spacing: 2px; margin: 0;
+        }
+        .subtitle { color: #7fffd4; font-size: 1.15rem; margin: 6px 0 4px; }
+        .status {
+            display: inline-block; margin-top: 8px; padding: 4px 14px;
+            border: 1px solid var(--green); border-radius: 20px;
+            background: rgba(164, 233, 100, 0.08);
+            color: var(--green); font-size: .95rem;
+        }
+        .status::before { content: "● "; }
+        .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+        .btn {
+            font-family: 'Fira Mono', monospace; font-weight: 700;
+            padding: 10px 22px; border-radius: 8px; text-decoration: none;
+            border: 2px solid var(--accent); color: var(--accent);
+            background: rgba(19, 23, 27, 0.85);
+            cursor: pointer; font-size: 1rem;
+            transition: background .2s, color .2s;
+        }
+        .btn:hover { background: var(--accent); color: var(--bg); }
+        .btn.btn-primary { background: var(--accent); color: var(--bg); }
+        .btn.btn-primary:hover { background: rgba(19, 23, 27, 0.85); color: var(--accent); }
+
+        /* ---------- Карточки ---------- */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 231, 0.14);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 18px 22px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 8px rgba(0, 255, 231, 0.12);
+            transition: box-shadow .3s;
+        }
+        .card:hover {
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55), 0 0 18px var(--accent-soft);
+        }
+        section { margin-bottom: 24px; }
+        h2 {
+            color: var(--accent); font-size: 1.3rem;
+            border-left: 4px solid var(--accent); padding-left: 10px;
+            margin: 0 0 14px;
+        }
+        .card h2 { border: none; padding: 0; }
+
+        .contacts p { margin: 6px 0; }
+        .contacts a { color: var(--text); text-decoration: none; }
+        .contacts a:hover { color: var(--accent); text-decoration: underline; }
+        .extra { margin-top: 14px; color: var(--green); }
+
+        .edu-title { font-weight: 600; color: var(--text); }
+        .edu-meta { color: var(--muted); font-size: .95rem; }
+
+        /* ---------- Навыки ---------- */
+        .skills-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px 28px;
+        }
+        .skill-group { margin-bottom: 6px; }
+        .skill-group h3 { color: #bfa600; font-size: .95rem; margin: 0 0 8px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            background: linear-gradient(90deg, var(--accent), #0077ff);
+            color: #0b1014; font-weight: 700; font-size: .85rem;
+            font-family: 'Fira Mono', monospace;
+            padding: 4px 12px; border-radius: 20px;
+        }
+        .tag-sm {
+            border: 1px solid var(--accent-soft); color: var(--accent);
+            font-size: .8rem; padding: 2px 10px; border-radius: 20px;
+            font-family: 'Fira Mono', monospace;
+        }
+
+        /* ---------- Опыт ---------- */
+        .job { display: flex; gap: 16px; align-items: flex-start; }
+        .job + .job { margin-top: 22px; padding-top: 22px; border-top: 1px dashed #3a4046; }
+        .job-logo {
+            width: 56px; height: 56px; border-radius: 12px; object-fit: cover;
+            box-shadow: 0 0 8px var(--accent-soft); flex-shrink: 0;
+            background: #181c20;
+        }
+        .job-title { color: var(--yellow); font-weight: 700; font-size: 1.05rem; }
+        .job-meta { color: var(--muted); font-size: .93rem; margin-bottom: 8px; }
+        .job ul { margin: 6px 0 10px; padding-left: 20px; color: var(--text); }
+        .job li { margin-bottom: 4px; }
+        .metric { color: var(--green); font-weight: 600; }
+
+        /* ---------- Проекты ---------- */
+        .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+        .project { display: flex; flex-direction: column; }
+        .project h3 { color: var(--yellow); margin: 0 0 6px; font-size: 1.12rem; }
+        .project p { margin: 0 0 10px; color: var(--muted); }
+        .project .tags { margin-bottom: 12px; }
+        .project-links { margin-top: auto; display: flex; gap: 16px; flex-wrap: wrap; }
+        .project-links a { font-weight: 700; text-decoration: none; font-family: 'Fira Mono', monospace; }
+        .project-links a:hover { text-decoration: underline; }
+
+        .project-featured { grid-column: 1 / -1; border-left-color: var(--yellow); }
+        .project-featured h3 { font-size: 1.35rem; }
+        .project ul { margin: 0 0 12px; padding-left: 20px; }
+        .project li { margin-bottom: 4px; }
+        .badge {
+            align-self: flex-start; margin-bottom: 8px; padding: 3px 12px;
+            border: 1px solid var(--yellow); border-radius: 20px;
+            color: var(--yellow); font-size: .82rem; font-family: 'Fira Mono', monospace;
+        }
+        .about p { margin: 0 0 10px; }
+        .prefs { color: var(--yellow); }
+
+        footer { text-align: center; color: #6c737a; font-size: .85rem; margin-top: 36px; }
+        footer a { color: #8a9299; text-decoration: none; }
+
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 500px) {
+            .neon { font-size: 1.7rem; }
+            .job { flex-direction: column; }
+            .projects { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- PDF ---------- */
+        @media print {
+            @page { size: A4; margin: 0; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            html, body { background: var(--bg) !important; }
+            #python-bg, .cta { display: none !important; }
+            .container { padding: 10mm 8mm; max-width: none; }
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+            .projects { grid-template-columns: 1fr 1fr; }
+            .card, .job, .project { break-inside: avoid; backdrop-filter: none; background: #23272b !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Сбалансированный фон: точки-созвездия с линиями + короткие формулы в тёмных тонах -->
+<canvas id="python-bg" aria-hidden="true"></canvas>
+
+<main class="container">
+
+    <!-- ===== ШАПКА ===== -->
+    <header class="header">
+        <img src="static/pro.png" alt="Андрей Быченков" class="profile-photo" onerror="this.src='https://github.com/AndreyBychenkow.png'">
+        <h1 class="neon">Андрей Быченков</h1>
+        <div class="subtitle mono">Python Backend-разработчик · FastAPI · Django · Asyncio</div>
+        <div class="status">Открыт к предложениям</div>
+        <div class="cta">
+            <a class="btn btn-primary" href="https://t.me/decebell032" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+            <a class="btn" href="#projects">Мои проекты</a>
+            <a class="btn" href="https://github.com/AndreyBychenkow" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <button type="button" class="btn" onclick="window.print()">Скачать резюме (PDF)</button>
+        </div>
+    </header>
+
+    <!-- ===== КОНТАКТЫ / ОБРАЗОВАНИЕ / СТЕК ===== -->
+    <div class="grid">
+        <section class="card contacts">
+            <h2>Контакты</h2>
+            <p>📧 <a id="email-link" href="mailto:decebell032@yandex.ru">decebell032@yandex.ru</a></p>
+            <script>
+                (function () {
+                    var e = 'decebell032' + '@' + 'yandex.ru';
+                    var a = document.getElementById('email-link');
+                    a.href = 'mailto:' + e;
+                    a.textContent = e;
+                })();
+            </script>
+            <p>💬 <a href="https://t.me/decebell032" target="_blank" rel="noopener noreferrer">@decebell032</a></p>
+            <p>💻 <a href="https://github.com/AndreyBychenkow" target="_blank" rel="noopener noreferrer">github.com/AndreyBychenkow</a></p>
+            <div class="extra">
+                📍 Россия · удалённо / офис · готов к релокации и командировкам
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Образование</h2>
+            <div class="edu-title">Российский университет кооперации</div>
+            <div class="edu-meta">Бакалавр · «Программное обеспечение вычислительной техники и автоматизированных систем»</div>
+            <div class="edu-meta">Год выпуска: 2011</div>
+        </section>
+
+        <section class="card">
+            <h2>Основной стек</h2>
+            <div class="tags">
+                <span class="tag">Python 3.12+</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Django / DRF</span>
+                <span class="tag">SQLAlchemy 2.0</span>
+                <span class="tag">Asyncio</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Redis</span>
+                <span class="tag">Celery / RabbitMQ</span>
+                <span class="tag">Docker / K8s</span>
+                <span class="tag">Pytest</span>
+                <span class="tag">CI/CD</span>
+                <span class="tag">LLM / AI API</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== НАВЫКИ ===== -->
+    <section class="card">
+        <h2>Навыки</h2>
+        <div class="skills-columns">
+            <div class="skill-group">
+                <h3>Языки и фреймворки</h3>
+                <div class="tags">
+                    <span class="tag-sm">Python (ООП, asyncio, typing)</span>
+                    <span class="tag-sm">FastAPI</span>
+                    <span class="tag-sm">Django</span>
+                    <span class="tag-sm">Django REST Framework</span>
+                    <span class="tag-sm">Pydantic v2</span>
+                    <span class="tag-sm">SQLAlchemy 2.0 (async)</span>
+                    <span class="tag-sm">Alembic</span>
+                    <span class="tag-sm">Aiohttp / HTTPX</span>
+                    <span class="tag-sm">Flask</span>
+                    <span class="tag-sm">Aiogram 3</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>API, Архитектура и AI-интеграции</h3>
+                <div class="tags">
+                    <span class="tag-sm">REST API</span>
+                    <span class="tag-sm">WebSockets</span>
+                    <span class="tag-sm">gRPC</span>
+                    <span class="tag-sm">OpenAPI / Swagger</span>
+                    <span class="tag-sm">Микросервисы</span>
+                    <span class="tag-sm">Clean Architecture</span>
+                    <span class="tag-sm">JWT / OAuth2</span>
+                    <span class="tag-sm">LLM API (OpenAI / Groq)</span>
+                    <span class="tag-sm">AI Agents / Whisper</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>Базы данных и брокеры сообщений</h3>
+                <div class="tags">
+                    <span class="tag-sm">PostgreSQL</span>
+                    <span class="tag-sm">Redis</span>
+                    <span class="tag-sm">RabbitMQ</span>
+                    <span class="tag-sm">Apache Kafka</span>
+                    <span class="tag-sm">Celery</span>
+                    <span class="tag-sm">MongoDB</span>
+                    <span class="tag-sm">ElasticSearch</span>
+                    <span class="tag-sm">ClickHouse</span>
+                    <span class="tag-sm">SQLite</span>
+                    <span class="tag-sm">S3 / MinIO</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>DevOps, Мониторинг и Инфраструктура</h3>
+                <div class="tags">
+                    <span class="tag-sm">Docker</span>
+                    <span class="tag-sm">Docker Compose</span>
+                    <span class="tag-sm">Kubernetes</span>
+                    <span class="tag-sm">GitLab CI</span>
+                    <span class="tag-sm">GitHub Actions</span>
+                    <span class="tag-sm">Nginx</span>
+                    <span class="tag-sm">Gunicorn / Uvicorn</span>
+                    <span class="tag-sm">Prometheus + Grafana</span>
+                    <span class="tag-sm">Sentry</span>
+                    <span class="tag-sm">Linux / Bash / Git</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>Тестирование и качество кода</h3>
+                <div class="tags">
+                    <span class="tag-sm">Pytest</span>
+                    <span class="tag-sm">pytest-asyncio</span>
+                    <span class="tag-sm">Unittest / Mocking</span>
+                    <span class="tag-sm">Testcontainers</span>
+                    <span class="tag-sm">Ruff / Flake8 / Mypy</span>
+                    <span class="tag-sm">TDD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ОПЫТ ===== -->
+    <section class="card">
+        <h2>Опыт работы</h2>
+
+        <div class="job">
+            <img src="static/d4-logo.png" alt="D4Технологии" class="job-logo" onerror="this.style.display='none'">
+            <div>
+                <div class="job-title">Python Software Engineer — «D4Технологии»</div>
+                <div class="job-meta">Февраль 2026 — настоящее время</div>
+                <ul>
+                    <li>Самостоятельно разработал флагманский продукт компании — систему мониторинга сети <a href="#projects">D4NMS</a> (включена в реестр российского ПО Минцифры №33911).</li>
+                    <li>Разработка асинхронных сервисов и REST API на FastAPI и Django, обмен данными в реальном времени по WebSockets.</li>
+                    <li>Оптимизация SQL-запросов в PostgreSQL: профилирование через <code>EXPLAIN ANALYZE</code>, настройка индексов, устранение проблемы N+1 запросов.</li>
+                    <li>Рефакторинг архитектуры и покрытие ключевых модулей автотестами на Pytest.</li>
+                    <li>Настройка CI/CD пайплайнов (GitLab CI, GitHub Actions), контейнеризация (Docker, Kubernetes).</li>
+                    <li>Проведение Code Review, командная разработка по Scrum.</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag-sm">FastAPI</span><span class="tag-sm">Django</span><span class="tag-sm">PostgreSQL</span>
+                    <span class="tag-sm">WebSockets</span><span class="tag-sm">Redis</span><span class="tag-sm">Docker / K8s</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="job">
+            <img src="static/cryptouch.jpg" alt="CRYPTOUCH.IO" class="job-logo" onerror="this.style.display='none'">
+            <div>
+                <div class="job-title">Python Backend Developer — CRYPTOUCH.IO</div>
+                <div class="job-meta">Май 2025 — Октябрь 2025 · коммерческий проект, социальная сеть</div>
+                <ul>
+                    <li>Проектирование и реализация масштабируемого REST API с автодокументацией в Swagger / OpenAPI.</li>
+                    <li>Участие в разработке микросервисной архитектуры и межсервисного взаимодействия.</li>
+                    <li>Реализация фоновых задач и очередей на Celery + Redis (лента событий, push-уведомления, рассылки).</li>
+                    <li>Обеспечение безопасности API (JWT-аутентификация, rate limiting, валидация данных), оптимизация времени отклика.</li>
+                    <li>Деплой в Docker-контейнерах через CI/CD, написание unit/интеграционных тестов на Pytest.</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag-sm">Django / DRF</span><span class="tag-sm">PostgreSQL</span><span class="tag-sm">Redis</span>
+                    <span class="tag-sm">Celery</span><span class="tag-sm">Docker</span><span class="tag-sm">Pytest</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРОЕКТЫ ===== -->
+    <section id="projects">
+        <h2>Проекты</h2>
+        <div class="projects">
+
+            <article class="card project project-featured">
+                <div class="badge">★ Главный проект · в реестре российского ПО Минцифры №33911</div>
+                <h3>D4NMS: система мониторинга сети</h3>
+                <p>Коммерческая система мониторинга сетевых устройств. Разработал полностью самостоятельно: <b>бэкенд, фронтенд, автотесты, дизайн, продуктовый сайт и инфраструктуру деплоя</b>.</p>
+                <ul>
+                    <li>Мониторинг до <span class="metric">1000 устройств</span> по протоколам Ping, SSH и SNMP в реальном времени.</li>
+                    <li>Мгновенные обновления статусов узлов и инцидентов через <b>WebSocket</b>.</li>
+                    <li>Выполнение CLI-команд по SSH прямо из браузера, встроенная библиотека шаблонов для Cisco, Eltex, Huawei, MikroTik, Juniper.</li>
+                    <li>Умная система алертов с классификацией по критичности и <span class="metric">5-уровневая</span> ролевая модель доступа (RBAC).</li>
+                    <li>Программа зарегистрирована в Роспатенте и официально включена в Единый реестр российского ПО (запись <span class="metric">№33911</span>).</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag-sm">Python</span><span class="tag-sm">FastAPI / Django</span><span class="tag-sm">PostgreSQL</span>
+                    <span class="tag-sm">WebSocket</span><span class="tag-sm">SSH / SNMP</span><span class="tag-sm">RBAC</span>
+                    <span class="tag-sm">Docker</span><span class="tag-sm">Pytest</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://d4nms.ru" target="_blank" rel="noopener noreferrer">Сайт продукта →</a>
+                    <a href="https://d4tech.ru" target="_blank" rel="noopener noreferrer">Сайт компании →</a>
+                </div>
+            </article>
+
+            <article class="card project">
+                <h3>Telegram AI-секретарь</h3>
+                <p>Интеллектуальный ассистент в Telegram (Node.js / n8n + Docker на Render). Принимает текст и голосовые сообщения (.ogg), распознаёт речь через Groq Whisper, обрабатывает запросы AI-агентом с памятью диалога, управляет задачами и встречами.</p>
+                <div class="tags">
+                    <span class="tag-sm">AI-агент</span><span class="tag-sm">Groq LLM</span><span class="tag-sm">Whisper STT</span>
+                    <span class="tag-sm">Telegram Bot API</span><span class="tag-sm">Google API</span><span class="tag-sm">Docker / Render</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/AndreyBychenkow/Telegram_AI_Secretary-N8N" target="_blank" rel="noopener noreferrer">GitHub →</a>
+                    <a href="https://telegram-ai-secretary-n8n.onrender.com" target="_blank" rel="noopener noreferrer">Live статус →</a>
+                </div>
+            </article>
+
+            <article class="card project">
+                <h3>TalonBot: автозапись к врачу</h3>
+                <p>Desktop-приложение для Windows. Мониторит региональный медицинский портал napriem.info и автоматически бронирует талон к врачу в момент появления свободного слота. Коммерческий pet-project.</p>
+                <div class="tags">
+                    <span class="tag-sm">Python</span><span class="tag-sm">CustomTkinter</span><span class="tag-sm">HTTP / Парсинг</span>
+                    <span class="tag-sm">Автоматизация</span><span class="tag-sm">Desktop GUI</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/AndreyBychenkow/TalonBot" target="_blank" rel="noopener noreferrer">GitHub →</a>
+                </div>
+            </article>
+
+            <article class="card project">
+                <h3>Этот сайт</h3>
+                <p>Персональный сайт-портфолио с интерактивной фоновой Canvas-анимацией, адаптивной вёрсткой и генерацией PDF-резюме.</p>
+                <div class="tags">
+                    <span class="tag-sm">Python / Flask</span><span class="tag-sm">HTML5 / CSS3</span><span class="tag-sm">GitHub Pages</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===== О СЕБЕ ===== -->
+    <section class="card about">
+        <h2>О себе</h2>
+        <p>Backend-разработчик на Python. Довожу продукты от архитектуры до продакшена: от системы сетевого мониторинга <b>D4NMS</b> в реестре российского ПО Минцифры до прикладной автоматизации и AI-ботов. Увлечён высоконагруженными асинхронными API, микросервисами и оптимизацией производительности баз данных.</p>
+        <p>Пишу чистый, поддерживаемый код с типизацией, тестами и понятной документацией. Постоянно изучаю новые инструменты и применяю современные практики (Async SQLAlchemy, Pydantic v2, LLM-агенты, контейнеризация).</p>
+        <p class="prefs">Ищу: позицию Python Backend Developer (Middle / Middle+), полная занятость, удалённо или офис, открыт к релокации.</p>
+    </section>
+
+    <footer>
+        © 2026 Андрей Быченков · <a href="https://github.com/AndreyBychenkow" target="_blank" rel="noopener noreferrer">github.com/AndreyBychenkow</a>
+    </footer>
+</main>
+
+<!-- ===== СБАЛАНСИРОВАННАЯ АНИМАЦИЯ: ТОЧКИ С ЛИНИЯМИ + КОРОТКИЙ КОД В ТЁМНЫХ ТОНАХ ===== -->
+<script>
+(function () {
+    const canvas = document.getElementById('python-bg');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    // 1. Точки, соединённые линиями (в благородных тёмно-бирюзовых и изумрудных тонах)
+    const nodeColors = [
+        '0, 210, 195',   // приглушённый бирюзовый
+        '95, 185, 110',  // приглушённый изумрудно-зелёный
+        '70, 155, 220'   // глубокий сине-голубой
+    ];
+
+    const nodes = Array.from({ length: 40 }, (_, i) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: 1.8 + Math.random() * 1.5,
+        rgb: nodeColors[i % nodeColors.length]
+    }));
+
+    // 2. Короткие символы и ключевые слова Python (не сливаются, окрашены в тёмные благородные оттенки)
+    const tokens = [
+        'async', 'await', 'def', 'yield', 'FastAPI',
+        'O(log n)', 'O(1)', 'λ x: x²', '∑', 'π',
+        '{ }', '[ ]', '>>>', 'SELECT *', 'Pytest',
+        'Docker', 'Redis', 'asyncio', '@app.get', 'P(A|B)',
+        'Django', 'Celery', 'K8s', 'self'
+    ];
+
+    // Тёмные приглушённые цвета для кода (не режут глаз, но хорошо читаются на фоне)
+    const textColors = [
+        '0, 195, 180',   // тёмная бирюза
+        '115, 185, 85',  // приглушённый питоновский зелёный
+        '185, 155, 55',  // тёмное золото / янтарь
+        '85, 155, 215'   // приглушённый стальной синий
+    ];
+
+    const cols = 6;
+    const rows = 4;
+    const items = Array.from({ length: cols * rows }, (_, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const cellW = width / cols;
+        const cellH = height / rows;
+        return {
+            text: tokens[i % tokens.length],
+            x: col * cellW + cellW * (0.15 + Math.random() * 0.7),
+            y: row * cellH + cellH * (0.15 + Math.random() * 0.7),
+            vy: -(0.18 + Math.random() * 0.18),
+            phase: Math.random() * Math.PI * 2,
+            size: 12 + (i % 3),
+            alpha: 0.25 + (i % 3) * 0.04,
+            rgb: textColors[i % textColors.length]
+        };
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Рисуем точки и соединяющие линии
+        for (let i = 0; i < nodes.length; i++) {
+            const n1 = nodes[i];
+            n1.x += n1.vx;
+            n1.y += n1.vy;
+
+            if (n1.x < 0 || n1.x > width) n1.vx *= -1;
+            if (n1.y < 0 || n1.y > height) n1.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(n1.x, n1.y, n1.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${n1.rgb}, 0.42)`;
+            ctx.fill();
+
+            for (let j = i + 1; j < nodes.length; j++) {
+                const n2 = nodes[j];
+                const dx = n1.x - n2.x;
+                const dy = n1.y - n2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 175) {
+                    const lineAlpha = (1 - dist / 175) * 0.18;
+                    ctx.beginPath();
+                    ctx.moveTo(n1.x, n1.y);
+                    ctx.lineTo(n2.x, n2.y);
+                    ctx.strokeStyle = `rgba(${n1.rgb}, ${lineAlpha.toFixed(3)})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Рисуем плавно плывущие короткие элементы кода и формул
+        ctx.textBaseline = 'middle';
+        for (const item of items) {
+            item.y += item.vy;
+            item.phase += 0.008;
+            item.x += Math.sin(item.phase) * 0.18;
+
+            if (item.y < -30) {
+                item.y = height + 30;
+            }
+
+            ctx.font = `${item.size}px "Fira Mono", monospace`;
+            ctx.fillStyle = `rgba(${item.rgb}, ${item.alpha})`;
+            ctx.fillText(item.text, item.x, item.y);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+})();
+</script>
+</body>
+</html>
